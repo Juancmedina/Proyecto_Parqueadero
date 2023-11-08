@@ -37,6 +37,6 @@ public class Main {
         System.out.println("Fecha y hora de entrada: " + salida.getEntrada().getFechaHoraEntrada());
         System.out.println("Fecha y hora de salida: " + salida.getFechaHoraSalida());
         System.out.println("Total de horas a facturar: " + horasEstacionado + " horas");
-        System.out.println("Costo de estacionamiento: $" + salida.getCosto());
+        System.out.println("Precio de estacionamiento: $" + salida.getCosto());
     }
 }
