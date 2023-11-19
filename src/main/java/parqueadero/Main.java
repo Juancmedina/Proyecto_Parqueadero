@@ -1,4 +1,5 @@
 package parqueadero;
+import java.util.List;
 import java.util.Scanner;
 import java.text.ParseException;
 import java.util.Date;
@@ -18,7 +19,22 @@ public class Main {
             System.out.println("Error al analizar la fecha. Asegúrate de ingresar el formato correcto.");
             return;
         }
+
         scanner.close();
+
+        GestionUsuarios gestionUsuarios = new GestionUsuarios();
+        Usuario usuario1 = new Usuario(1, "Nombre1", "1234567890", "Dirección1");
+        gestionUsuarios.agregarUsuario(usuario1);
+
+        GestionCeldas gestionCeldas = new GestionCeldas(50);
+
+        Celda celdaDisponible = gestionCeldas.asignarCeldaDisponible();
+        if (celdaDisponible != null) {
+            System.out.println("Se asignó la celda número: " + celdaDisponible.getNumeroCelda());
+        }
+
+        int numeroCeldaALiberar = 1;
+        gestionCeldas.liberarCelda(numeroCeldaALiberar);
 
         Usuario usuario = new Usuario(1, "Nombre del Usuario", "123456789", "Dirección del Usuario");
 
@@ -38,5 +54,18 @@ public class Main {
         System.out.println("Fecha y hora de salida: " + salida.getFechaHoraSalida());
         System.out.println("Total de horas a facturar: " + horasEstacionado + " horas");
         System.out.println("Precio de estacionamiento: $" + salida.getCosto());
+
+        List<Celda> celdasDisponibles = gestionCeldas.getCeldasDisponibles();
+
+        if (!((List<?>) celdasDisponibles).isEmpty()) {
+            System.out.println("Las celdas disponibles son:");
+
+            // Iterar sobre las celdas disponibles e imprimir su número
+            for (Celda celda : celdasDisponibles) {
+                System.out.println("Celda número: " + celda.getNumeroCelda());
+            }
+        } else {
+            System.out.println("No hay celdas disponibles en este momento.");
+        }
     }
 }
